@@ -1,6 +1,7 @@
 package topcolleguesbackend.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import topcolleguesbackend.entity.Collegue;
-import topcolleguesbackend.entity.Action;
 import topcolleguesbackend.repository.CollegueRepository;
 
 @RestController
@@ -43,20 +43,21 @@ public class CollegueController {
 	}
 
 	@RequestMapping(method = RequestMethod.PATCH, path = "/{pseudo}")
-	public List<Collegue> action(@RequestBody Action act, @PathVariable String pseudo) {
+	public Collegue action(@RequestBody Map<String, String> act, @PathVariable String pseudo) {
 		
 		Optional<Collegue> optCol = colRepo.findByPseudo(pseudo);
 		if(optCol.isPresent()) {   
 			Collegue col = optCol.get();
-			if (act.getAction().equals("aimer")) {
+			if (act.get("action").equals("aimer")) {
 				col.setScore(col.getScore() + 10);
 				this.colRepo.save(col);
-			} else if (act.getAction().equals("detester")) {
+			} else if (act.get("action").equals("detester")) {
 				col.setScore(col.getScore() - 5);
 				this.colRepo.save(col);
 			}
+			return col;
 		}
-		return this.colRepo.findAll();
+		return null;
 		
 	}
 }
