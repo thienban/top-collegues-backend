@@ -19,6 +19,7 @@ public class Collegue {
 	private String pseudo;
 	@Column
 	private String imageURL;
+	
 	public Integer getId() {
 		return id;
 	}

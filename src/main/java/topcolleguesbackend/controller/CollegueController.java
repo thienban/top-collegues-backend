@@ -39,7 +39,6 @@ public class CollegueController {
 
 		// retourne la liste
 		return this.colRepo.findAll();
-
 	}
 
 	@RequestMapping(method = RequestMethod.PATCH, path = "/{pseudo}")
@@ -58,6 +57,21 @@ public class CollegueController {
 			return col;
 		}
 		return null;
-		
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
