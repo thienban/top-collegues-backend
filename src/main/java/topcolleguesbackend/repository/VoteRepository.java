@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import topcolleguesbackend.entity.Vote;
 
 public interface VoteRepository extends JpaRepository<Vote, Integer>{
-	List<Vote> findTop3ByIdGreaterThan( Integer id);
+	List<Vote> findByIdGreaterThan( Integer id);
+	List<Vote> findFirst3ByOrderByIdDesc();
 }
 

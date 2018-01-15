@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import topcolleguesbackend.entity.Avis;
 import topcolleguesbackend.entity.Collegue;
+import topcolleguesbackend.entity.Vote;
 import topcolleguesbackend.repository.CollegueRepository;
+import topcolleguesbackend.repository.VoteRepository;
 
 @RestController
 @RequestMapping("/collegues")
@@ -21,6 +24,9 @@ public class CollegueController {
 
 	@Autowired
 	private CollegueRepository colRepo;
+	
+	@Autowired
+	private VoteRepository voteRepo;
 
 	@GetMapping
 	public List<Collegue> listercollegue() {
@@ -48,9 +54,13 @@ public class CollegueController {
 		if(optCol.isPresent()) {   
 			Collegue col = optCol.get();
 			if (act.get("action").equals("aimer")) {
+				Vote v = new Vote(Avis.aime,col);
+				this.voteRepo.save(v);
 				col.setScore(col.getScore() + 10);
 				this.colRepo.save(col);
 			} else if (act.get("action").equals("detester")) {
+				Vote v = new Vote(Avis.deteste,col);
+				this.voteRepo.save(v);
 				col.setScore(col.getScore() - 5);
 				this.colRepo.save(col);
 			}

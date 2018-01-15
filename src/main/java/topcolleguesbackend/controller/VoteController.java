@@ -21,9 +21,9 @@ public class VoteController {
 	@RequestMapping(method = RequestMethod.GET, params = {"since"})
 	public List<Vote> getVotes(@RequestParam("since") Optional<Integer> since){
 		if(since.isPresent()) {
-			return voteRepo.findTop3ByIdGreaterThan(since.get());
+			return voteRepo.findByIdGreaterThan(since.get());
 		} else {
-			return voteRepo.findAll();
+			return voteRepo.findFirst3ByOrderByIdDesc();
 		}
 		
 	}

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Vote {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -24,18 +25,24 @@ public class Vote {
 	private Avis avis;
 	@Column
 	private LocalDate date;
-	
+	@ManyToOne
+	@JoinColumn(name = "COL_ID")
+	private Collegue collegue;
+
+	public Vote(Avis avis, Collegue collegue) {
+		this.avis = avis;
+		this.collegue = collegue;
+		date = LocalDate.now();
+	}
+
 	public Vote() {
 		date = LocalDate.now();
 	}
-	
-	@ManyToOne
-	@JoinColumn(name="COL_ID")
-	private Collegue collegue;
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -43,18 +50,23 @@ public class Vote {
 	public Collegue getCollegue() {
 		return collegue;
 	}
+
 	public void setCollegue(Collegue collegue) {
 		this.collegue = collegue;
 	}
+
 	public Avis getAvis() {
 		return avis;
 	}
+
 	public void setAvis(Avis avis) {
 		this.avis = avis;
 	}
+
 	public LocalDate getDate() {
 		return date;
 	}
+
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
