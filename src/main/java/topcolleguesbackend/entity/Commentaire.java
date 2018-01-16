@@ -20,18 +20,12 @@ public class Commentaire {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column
-	private String champ;
+	private String commentaire;
 	@Column
 	private LocalDate date;
 	@ManyToOne
 	@JoinColumn(name = "COL_ID")
 	private Collegue collegue;
-
-	public Commentaire(String champ, Collegue collegue) {
-		this.champ = champ;
-		this.collegue = collegue;
-		date = LocalDate.now();
-	}
 
 	public Commentaire() {
 		date = LocalDate.now();
@@ -45,12 +39,12 @@ public class Commentaire {
 		this.id = id;
 	}
 
-	public String getChamp() {
-		return champ;
+	public String getCommentaire() {
+		return commentaire;
 	}
 
-	public void setChamp(String champ) {
-		this.champ = champ;
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
 	}
 
 	public LocalDate getDate() {
@@ -68,4 +62,5 @@ public class Commentaire {
 	public void setCollegue(Collegue collegue) {
 		this.collegue = collegue;
 	}
+
 }

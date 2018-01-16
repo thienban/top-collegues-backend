@@ -24,7 +24,6 @@ public class CollegueController {
 
 	@Autowired
 	private CollegueRepository colRepo;
-	
 	@Autowired
 	private VoteRepository voteRepo;
 
